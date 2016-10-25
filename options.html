@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>WallpaperCycler - Options</title>
+    <script src="jquery-2.2.3.min.js"></script>
+    <script src="options.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700" rel="stylesheet">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Comfortaa', cursive;
+      }
+      body {
+        padding-top: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-bottom: 16px;
+        text-align: center;
+      }
+      h3 {
+        letter-spacing: 1px;
+        font-size: 40px;
+        margin-top: 0px;
+      }
+      select {
+        font-family: 'Comfortaa', cursive;
+        background: transparent;
+      }
+      select:focus {
+        outline: none;
+      }
+      #dimension_height, #dimension_width, #interval {
+        width: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>WallpaperCycler - Options</h3>
+    <form>
+      <label for="category">Picture Category: </label>
+      <select id="category">
+        <option value="unsplash-random">Unsplash.com - Random</option><!--https://source.unsplash.com/-->
+        <option value="unsplash-buildings">Unsplash.com - Buildings</option>
+        <option value="unsplash-food">Unsplash.com - Food</option>
+        <option value="unsplash-nature">Unsplash.com - Nature</option>
+        <option value="unsplash-people">Unsplash.com - People</option>
+        <option value="unsplash-technology">Unsplash.com - Technology</option>
+        <option value="unsplash-objects">Unsplash.com - Objects</option>
+        <option value="nasa-apod">Nasa.gov - Astronomy Picture of the Day</option><!--https://api.nasa.gov/api.html#how-do-i-see-my-current-usage?-->
+        <option value="bing-iod" disabled>Bing.com - Image of the Day</option> <!--http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1-->
+        <option value="desktoppr-wallpaper">Desktoppr.co - Random</option><!--https://api.desktoppr.co/1/wallpapers/random?auth_token=JitLTYzKio-PyVWfNvhx-->
+        <option value="pixabay-fashion">Pixabay.com - Fasion</option>
+        <option value="pixabay-nature">Pixabay.com - Nature</option>
+        <option value="pixabay-backgrounds">Pixabay.com - Backgrounds</option>
+        <option value="pixabay-science">Pixabay.com - Science</option>
+        <option value="pixabay-education">Pixabay.com - Education</option>
+        <option value="pixabay-people">Pixabay.com - People</option>
+        <option value="pixabay-feelings">Pixabay.com - Feelings</option>
+        <option value="pixabay-religion">Pixabay.com - Religion</option>
+        <option value="pixabay-health">Pixabay.com - Health</option>
+        <option value="pixabay-places">Pixabay.com - Places</option>
+        <option value="pixabay-animals">Pixabay.com - Animals</option>
+        <option value="pixabay-industry">Pixabay.com - Industry</option>
+        <option value="pixabay-food">Pixabay.com - Food</option>
+        <option value="pixabay-computer">Pixabay.com - Comptuer</option>
+        <option value="pixabay-sports">Pixabay.com - Sports</option>
+        <option value="pixabay-transportation">Pixabay.com - Transportation</option>
+        <option value="pixabay-travel">Pixabay.com - Travel</option>
+        <option value="pixabay-buildings">Pixabay.com - Buildings</option>
+        <option value="pixabay-business">Pixabay.com - Business</option>
+        <option value="pixabay-music">Pixabay.com - Music</option>
+        <option value="random-random">Random Source - Random Category</option>
+      </select>
+      <br>
+      <br>
+      <label for="dimension_width">Screen Dimension: </label>
+      <input type="text" id="dimension_width">x<input type="text" id="dimension_height">
+      <br>
+      <br>
+      <label for="interval_unit">Cycle Interval Unit</label>
+      <select id="interval_unit">
+        <option value="days">Days</option>
+        <option value="hours">Hours</option>
+        <option value="minutes">Minutes</option>
+      </select>
+      <br>
+      <br>
+      <label for="interval">Cycle Interval (<span id="interval_unit_span"></span>): </label>
+      <input type="number" step="1" min="1" id="interval">
+      <br>
+      <br>
+      <span><b id="remaining"></b> until next Cycle!</span>
+      <br>
+      <br>
+      <span id="save_status"></span>
+      <br>
+      <button id="save_button" type="button">Save</button><button id="update_now_button" type="button">Update Wallpaper Now</button>
+    </form>
+  </body>
+</html>
