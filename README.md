@@ -1,6 +1,8 @@
 # WallpaperCycler
 Chrome OS Wallpaper Cycler
 
+**Warning: This will make your device lag and instantly drop frame rates. This is because the background script is running a window.setTimeout to count down every second until the cycle. I should use the Chrome API to schedule tasks, but I don't bother...**
+
 ## What is it?
 WallpaperCycler indexes image APIs on the web, and sets the Chrome OS wallpaper in a set interval.
 In the options page, you can choose the API source (Nasa, Unsplash, etc), and set your wallpaper update interval (minutes, days, hours)
