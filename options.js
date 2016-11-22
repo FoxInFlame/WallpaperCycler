@@ -65,7 +65,7 @@ function restore_options() {
     "source": "unsplash-random",
     "screenWidth": 1920,
     "screenHeight": 1080,
-    "interval_unit": "hours",
+    "interval_unit": "days",
     "interval": 1,
     "timeout": "0000 00 00, 00:00:00"
   }, function(items) {

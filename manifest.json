@@ -8,8 +8,8 @@
 
   "permissions": [
     "storage",
-    "tabs",
-    "wallpaper"
+    "wallpaper",
+    "alarms"
   ],
   "background": {
     "scripts": [

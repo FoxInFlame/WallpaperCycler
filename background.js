@@ -14,35 +14,38 @@ var interval_ms;
 var timeout;
 
 function cycleWallpaper() {
-  clearTimeout(timeout);
-  chrome.storage.sync.get({
-    "source": "unsplash-random",
-    "screenWidth": 1920,
-    "screenHeight": 1080,
-    "interval_unit": "hours",
-    "interval": 1
-  }, function(items) {
-    source = items.source;
-    screenWidth = items.screenWidth;
-    screenHeight = items.screenHeight;
-    interval_unit = items.interval_unit;
-    interval = items.interval;
-    interval_ms = convertToMs(interval, interval_unit);
-    source_url = getURL(source, screenWidth, screenHeight);
-    chrome.wallpaper.setWallpaper({
-      "url": source_url,
-      "layout": "CENTER_CROPPED",
-      "filename": source,
-      "thumbnail": true
-    }, function() {
-      var nextSet = Date.now();
-      nextSet += interval_ms;
-      nextSet = new Date(nextSet);
-      nextSet_date = nextSet.getFullYear().toString() + " " + ("0" + (nextSet.getMonth() + 1).toString()).slice(-2) + " " + ("0" + nextSet.getDate().toString()).slice(-2) + ", " + ("0" + nextSet.getHours().toString()).slice(-2) + ":" + ("0" + nextSet.getMinutes().toString()).slice(-2) + ":" + ("0" + nextSet.getSeconds().toString()).slice(-2);
-      chrome.storage.sync.set({
-        "timeout": nextSet_date
+  chrome.alarms.clear("cycleWallpaper", function() {
+    chrome.storage.sync.get({
+      "source": "unsplash-random",
+      "screenWidth": 1920,
+      "screenHeight": 1080,
+      "interval_unit": "days",
+      "interval": 1
+    }, function(items) {
+      source = items.source;
+      screenWidth = items.screenWidth;
+      screenHeight = items.screenHeight;
+      interval_unit = items.interval_unit;
+      interval = items.interval;
+      interval_ms = convertToMs(interval, interval_unit);
+      source_url = getURL(source, screenWidth, screenHeight);
+      chrome.wallpaper.setWallpaper({
+        "url": source_url,
+        "layout": "CENTER_CROPPED",
+        "filename": source,
+        "thumbnail": true
       }, function() {
-        timeout = window.setTimeout(cycleWallpaper, interval_ms);
+        var nextSet = Date.now();
+        nextSet += interval_ms;
+        nextSet = new Date(nextSet);
+        nextSet_date = nextSet.getFullYear().toString() + " " + ("0" + (nextSet.getMonth() + 1).toString()).slice(-2) + " " + ("0" + nextSet.getDate().toString()).slice(-2) + ", " + ("0" + nextSet.getHours().toString()).slice(-2) + ":" + ("0" + nextSet.getMinutes().toString()).slice(-2) + ":" + ("0" + nextSet.getSeconds().toString()).slice(-2);
+        chrome.storage.sync.set({
+          "timeout": nextSet_date
+        }, function() {
+          chrome.alarms.create("cycleWallpaper", {
+            when: interval_ms
+          });
+        });
       });
     });
   });
@@ -93,28 +96,31 @@ function getURL(source, sw, sh) {
       error: function(jqXHR, textStatus, thrownError) {
         console.log(textStatus);
         console.log(jqXHR);
-        url = "https://placehold.it/1920x1080?text=Not Found";
+        url = "NotAvailable.png";
       }
     });
     return url;
-  }/*
+  }
   if(source == "bing-iod") {
     $.ajax({
       async: false,
-      url: "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1",
+      url: "http://crossorigin.me/http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1",
       success: function(data) {
         url = "http://bing.com" + data.images[0].url;
       },
       error: function(jqXHR, textStatus, thrownError) {
         console.log(textStatus);
         console.log(jqXHR);
-        url = "https://placehold.it/1920x1080?text=Not Found";
+        url = "NotAvailable.png";
       }
     });
     return url;
   }
+  /*
+  Bing does not work from Nov 4th 2013 because they turned the Access-Control-Allow-Origin header off.
   
-  Bing does not work from Nov 4th 2013 because they turned the Access-Control-Allow-Origin header off.*/
+  But... http://crossorigin.me provides CORS access to website where CORS is not enabled!
+  */
   if(source == "desktoppr-wallpaper") {
     $.ajax({
       async: false,
@@ -126,7 +132,7 @@ function getURL(source, sw, sh) {
       error: function(jqXHR, textStatus, thrownError) {
         console.log(textStatus);
         console.log(jqXHR);
-        url = "https://placehold.it/1920x1080?text=Not Found";
+        url = "NotAvailable.png";
       }
     });
     return url;
@@ -144,5 +150,5 @@ function getURL(source, sw, sh) {
   if(source.indexOf("pixabay") !== -1) {
     return "https://placehold.it/1920x1080?text=Pixabay Still in Devleopment";
   }
-  return "https://placehold.it/1920x1080?text=Not Found";
+  return "NotAvailable.png";
 }
