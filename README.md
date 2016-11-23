@@ -8,6 +8,7 @@ WallpaperCycler indexes image APIs on the web, and sets the Chrome OS wallpaper 
 In the options page, you can choose the API source (Nasa, Unsplash, etc), and set your wallpaper update interval (minutes, days, hours)
 
 ![Options Page Screenshot](http://i.imgur.com/zVvJhRF.png)
+![Options Page Screenshot2](http://i.imgur.com/5NUBhZu.png)
 
 ## What sources are there?
 WallpaperCycler provides the following sources:
