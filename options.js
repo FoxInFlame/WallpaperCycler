@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  
   var screenHeight = window.screen.height;
   var screenWidth = window.screen.width;
   $("#dimension_height").val(screenHeight);
@@ -16,6 +17,11 @@ $(document).ready(function() {
       restore_options();
     });
   });
+  
+  $("#custom_folder_input").on("change", function(event) {
+    console.log("changed");
+    fileHandle(event);
+  });
 });
 
 
@@ -30,8 +36,12 @@ function showRemaining(end) {
   var now = new Date();
   var distance = end - now;
   if (distance < 0) {
-      clearInterval(timer);
-      return "EXPIRED!";
+    chrome.storage.sync.get({
+      "timeout": "0000 00 00, 00:00:00"
+    }, function() {
+      restore_options_time();
+    });
+    return "EXPIRED!";
   }
   var days = Math.floor(distance / _day);
   var hours = Math.floor((distance % _day) / _hour);
@@ -46,7 +56,7 @@ function updateTime() {
   if(remaining == "EXPIRED!") {
     $("#remaining").parent().html("<b id='remaining'>" + remaining + "</b>");
   } else {
-    $("#remaining").html(remaining);
+    $("#remaining").parent().html("<b id='remaining'>" + remaining + "</b> until next Cycle!");
   }
   timeUpdate = window.setTimeout(updateTime, 1000);
 }
@@ -74,6 +84,22 @@ function restore_options() {
     $("#dimension_height").val(items.screenHeight);
     $("#interval_unit option[value='" + items.interval_unit + "']").prop("selected", true);
     $("#interval").val(items.interval);
+    nextCycle = items.timeout;
+    nextCycle_year = nextCycle.substring(0, 4);
+    nextCycle_month = nextCycle.substring(5, 7);
+    nextCycle_day = nextCycle.substring(8, 10);
+    nextCycle_hour = nextCycle.substring(12, 14);
+    nextCycle_minute = nextCycle.substring(15, 17);
+    nextCycle_second = nextCycle.substring(18, 20);
+    nextCycle_date = new Date(nextCycle_year, (nextCycle_month - 1), nextCycle_day, nextCycle_hour, nextCycle_minute, nextCycle_second);
+    updateTime();
+  });
+}
+function restore_options_time() {
+  clearTimeout(timeUpdate);
+  chrome.storage.sync.get({
+    "timeout": "0000 00 00, 00:00:00"
+  }, function(items) {
     nextCycle = items.timeout;
     nextCycle_year = nextCycle.substring(0, 4);
     nextCycle_month = nextCycle.substring(5, 7);
@@ -125,4 +151,42 @@ function save_options(callback) {
       $("#save_status").html("");
     }, 3000);
   });
+}
+
+function fileHandle(event) {
+  var errorCount = 0;
+  var imageCount = 0;
+  var files = event.target.files;
+  var loaded = false;
+  if(files) {
+    var i;
+    for (i = 0; i < files.length; i++) {
+      (function(file) {
+        loaded = false;
+        var fileType = file["type"];
+        var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+        if($.inArray(fileType, ValidImageTypes) < 0) {
+          errorCount++;
+          return;
+        };
+        imageCount++;
+        var reader = new FileReader();
+        reader.addEventListener("load", function(e) {
+          $("#preview").append("<img style=\"width: 50%\" src=\"" + reader.result + "\">");
+        }, false);
+        reader.readAsDataURL(files[i]);
+      })(files[i]);
+    };
+  } else {
+    $("#preview").html("");
+  }
+  function showPreview(url) {
+    $("#preview").append("<br><img src=\"" + reader.result + "\">");
+  }
+  /*
+  console.log(event);
+  var files = event.target.files;
+  var relativePath = files[0].webkitRelativePath;
+  var folder = relativePath.split("/");
+  console.log(folder);*/
 }

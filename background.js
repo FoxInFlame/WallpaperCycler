@@ -13,6 +13,11 @@ var interval;
 var interval_ms;
 var timeout;
 
+chrome.alarms.onAlarm.addListener(function(alarm) {
+  if(alarm.name == "cycleWallpaper") {
+    cycleWallpaper();
+  }
+});
 function cycleWallpaper() {
   chrome.alarms.clear("cycleWallpaper", function() {
     chrome.storage.sync.get({
@@ -43,7 +48,7 @@ function cycleWallpaper() {
           "timeout": nextSet_date
         }, function() {
           chrome.alarms.create("cycleWallpaper", {
-            when: interval_ms
+            when: Date.now() + interval_ms
           });
         });
       });
@@ -136,6 +141,27 @@ function getURL(source, sw, sh) {
       }
     });
     return url;
+  }
+  
+  if(source.indexOf("reddit-animewallpaper") !== -1) {
+    // new
+    // hot
+    // new-nsfw
+    // hot-nsfw
+    switch(source) {
+      case "reddit-animewallpaper-new":
+        return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=false&sort=new";
+      case "reddit-animewallpaper-hot":
+        return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=false&sort=hot";
+      case "reddit-animewallpaper-new-nsfw":
+        return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=true&sort=new";
+      case "reddit-animewallpaper-hot-nsfw":
+        return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=true&sort=hot";
+      case "reddit-animewallpaper-new-nsfw-only":
+        return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=only&sort=new";
+      case "reddit-animewallpaper-hot-nsfw-only":
+        return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=only&sort=hot";
+    }
   }
   
   

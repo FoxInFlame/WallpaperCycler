@@ -5,35 +5,7 @@
     <script src="jquery-2.2.3.min.js"></script>
     <script src="options.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700" rel="stylesheet">
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Comfortaa', cursive;
-      }
-      body {
-        padding-top: 16px;
-        padding-left: 8px;
-        padding-right: 8px;
-        padding-bottom: 16px;
-        text-align: center;
-      }
-      h3 {
-        letter-spacing: 1px;
-        font-size: 40px;
-        margin-top: 0px;
-      }
-      select {
-        font-family: 'Comfortaa', cursive;
-        background: transparent;
-      }
-      select:focus {
-        outline: none;
-      }
-      #dimension_height, #dimension_width, #interval {
-        width: 50px;
-      }
-    </style>
+    <link href="options.scss" rel="stylesheet">
   </head>
   <body>
     <h3>WallpaperCycler - Options</h3>
@@ -50,6 +22,12 @@
         <option value="nasa-apod">Nasa.gov - Astronomy Picture of the Day</option><!--https://api.nasa.gov/api.html#how-do-i-see-my-current-usage?-->
         <option value="bing-iod">Bing.com - Image of the Day</option> <!--http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1-->
         <option value="desktoppr-wallpaper">Desktoppr.co - Random</option><!--https://api.desktoppr.co/1/wallpapers/random?auth_token=JitLTYzKio-PyVWfNvhx-->
+        <option value="reddit-animewallpaper-new">/r/animewallpaper - Newest</option>
+        <option value="reddit-animewallpaper-hot">/r/animewallpaper - Hottest</option>
+        <option value="reddit-animewallpaper-new-nsfw">/r/animewallpaper - Newest include NSFW</option>
+        <option value="reddit-animewallpaper-hot-nsfw">/r/animewallpaper - Hottest include NSFW</option>
+        <option value="reddit-animewallpaper-new-nsfwonly">/r/animewallpaper - Newest NSFW Only</option>
+        <option value="reddit-animewallpaper-hot-nsfwonly">/r/animewallpaper - Hottest NSFW Only</option>
         <option value="pixabay-fashion">Pixabay.com - Fasion</option>
         <option value="pixabay-nature">Pixabay.com - Nature</option>
         <option value="pixabay-backgrounds">Pixabay.com - Backgrounds</option>
@@ -73,6 +51,11 @@
         <option value="random-random">Random Source - Random Category</option>
       </select>
       <br>
+      <!--<br>
+      <label for="custom_folder">Custom Folder: </label>
+      <input type="file" id="custom_folder_input" webkitdirectory mozdirectory msdirectory odirectory directory multiple>
+      <div id="preview"></div>
+      <br>-->
       <br>
       <label for="dimension_width">Screen Dimension: </label>
       <input type="text" id="dimension_width">x<input type="text" id="dimension_height">
