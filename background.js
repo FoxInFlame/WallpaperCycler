@@ -157,9 +157,9 @@ function getURL(source, sw, sh) {
         return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=true&sort=new";
       case "reddit-animewallpaper-hot-nsfw":
         return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=true&sort=hot";
-      case "reddit-animewallpaper-new-nsfw-only":
+      case "reddit-animewallpaper-new-nsfwonly":
         return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=only&sort=new";
-      case "reddit-animewallpaper-hot-nsfw-only":
+      case "reddit-animewallpaper-hot-nsfwonly":
         return "http://www.foxinflame.tk/dev/matomari/api/animeWallpaper.php?nsfw=only&sort=hot";
     }
   }
@@ -169,7 +169,7 @@ function getURL(source, sw, sh) {
   
   
   if(source == "random-random") {
-    var sources = ["unsplash-random", "unsplash-buildings", "unsplash-food", "unsplash-nature", "unsplash-people", "unsplash-technology", "unsplash-objects", "nasa-apod", "desktoppr-wallpaper", "pixabay-fasion", "pixabay-nature", "pixabay-backgrounds", "pixabay-science", "pixabay-education", "pixabay-people", "pixabay-feelings", "pixabay-religion", "pixabay-health", "pixabay-places", "pixabay-animals", "pixabay-industry", "pixabay-food", "pixabay-computer", "pixabay-sports", "pixabay-transportation", "pixabay-travel", "pixabay-buildings", "pixabay-business", "pixabay-music"];
+    var sources = ["unsplash-random", "unsplash-buildings", "unsplash-food", "unsplash-nature", "unsplash-people", "unsplash-technology", "unsplash-objects", "nasa-apod", "desktoppr-wallpaper", "reddit-animewallpaper-new", "reddit-animewallpaper-hot", "reddit-animewallpaper-new-nsfw", "reddit-animewallpaper-hot-nsfw", "reddit-animewallpaper-new-nsfwonly", "reddit-animewallpaper-hot-nsfwonly", "pixabay-fasion", "pixabay-nature", "pixabay-backgrounds", "pixabay-science", "pixabay-education", "pixabay-people", "pixabay-feelings", "pixabay-religion", "pixabay-health", "pixabay-places", "pixabay-animals", "pixabay-industry", "pixabay-food", "pixabay-computer", "pixabay-sports", "pixabay-transportation", "pixabay-travel", "pixabay-buildings", "pixabay-business", "pixabay-music"];
     return getURL(sources[Math.floor(Math.random()*sources.length)], sw, sh);
   }
   
