@@ -1,6 +1,8 @@
 # WallpaperCycler
 Chrome OS Wallpaper Cycler
 
+**It only works on Chrome OS!!**
+
 ## What is it?
 WallpaperCycler indexes image APIs on the web, and sets the Chrome OS wallpaper in a set interval.
 In the options page, you can choose the API source (Nasa, Unsplash, etc), and set your wallpaper update interval (minutes, days, hours)
