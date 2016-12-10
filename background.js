@@ -172,17 +172,108 @@ function getURL(source, sw, sh) {
     }
   }
   
-  
-  // INSERT THE WHOLE LOT OF PIXABAY HERE ONCE HD IS COMPLETE
-  
+  if(source.indexOf("deviantart-wallpaper") !== -1) {
+    var category = source.substr(21);
+    console.log(category);
+    var x = function getNewestDeviantArt(rss) {
+      $.ajax({
+        async: false,
+        cache: true,
+        url: rss,
+        success: function(data) {
+          var x2js = new X2JS();
+          data = x2js.xml2json(data);
+          url = data["rss"]["channel"]["item"][0]["content"]["_url"];
+        },
+        error: function(jqXHR, textStatus, thrownError) {
+          console.log(textStatus);
+          console.log(jqXHR);
+          url = "NotAvailable.png";
+        }
+      });
+      return url;
+    }
+    switch(category) {
+      case "3d":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2F3d");
+        break;
+      case "abstract":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fabstract");
+        break;
+      case "animals":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fanimals");
+        break;
+      case "fantasy":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Ffantasy");
+        break;
+      case "fractals":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Ffractals");
+        break;
+      case "widescreen":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fwidescreen");
+        break;
+      case "scenery":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fscenery");
+        break;
+      case "apple":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fapple");
+        break;
+      case "horror":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fhorror");
+        break;
+      case "minimalistic":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fminimalistic");
+        break;
+      case "other":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fother");
+        break;
+      case "scifi":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fscifi");
+        break;
+      case "vector":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fvector");
+        break;
+      case "vehicles":
+        url_final = x("http://backend.deviantart.com/rss.xml?type=deviation&q=boost%3Apopular+in%3Acustomization%2Fwallpaper%2Fvehicles");
+        break;
+    }
+    return url_final;
+  }
   
   if(source == "random-random") {
-    var sources = ["unsplash-random", "unsplash-buildings", "unsplash-food", "unsplash-nature", "unsplash-people", "unsplash-technology", "unsplash-objects", "nasa-apod", "desktoppr-wallpaper", "reddit-animewallpaper-new", "reddit-animewallpaper-hot", "reddit-animewallpaper-new-nsfw", "reddit-animewallpaper-hot-nsfw", "reddit-animewallpaper-new-nsfwonly", "reddit-animewallpaper-hot-nsfwonly", "pixabay-fasion", "pixabay-nature", "pixabay-backgrounds", "pixabay-science", "pixabay-education", "pixabay-people", "pixabay-feelings", "pixabay-religion", "pixabay-health", "pixabay-places", "pixabay-animals", "pixabay-industry", "pixabay-food", "pixabay-computer", "pixabay-sports", "pixabay-transportation", "pixabay-travel", "pixabay-buildings", "pixabay-business", "pixabay-music"];
+    var sources = [
+      "unsplash-random",
+      "unsplash-buildings",
+      "unsplash-food",
+      "unsplash-nature",
+      "unsplash-people",
+      "unsplash-technology",
+      "unsplash-objects",
+      "nasa-apod",
+      "desktoppr-wallpaper",
+      "reddit-animewallpaper-new",
+      "reddit-animewallpaper-hot",
+      "reddit-animewallpaper-new-nsfw",
+      "reddit-animewallpaper-hot-nsfw",
+      "reddit-animewallpaper-new-nsfwonly",
+      "reddit-animewallpaper-hot-nsfwonly",
+      "deviantart-wallpaper-3d",
+      "deviantart-wallpaper-abstract",
+      "deviantart-wallpaper-animals",
+      "deviantart-wallpaper-fantasy",
+      "deviantart-wallpaper-fractals",
+      "deviantart-wallpaper-widescreen",
+      "deviantart-wallpaper-scenery",
+      "deviantart-wallpaper-apple",
+      "deviantart-wallpaper-horror",
+      "deviantart-wallpaper-minimalistic",
+      "deviantart-wallpaper-other",
+      "deviantart-wallpaper-scifi",
+      "deviantart-wallpaper-vector",
+      "deviantart-wallpaper-vehicles"
+    ];
     return getURL(sources[Math.floor(Math.random()*sources.length)], sw, sh);
   }
   
-  if(source.indexOf("pixabay") !== -1) {
-    return "https://placehold.it/1920x1080?text=Pixabay Still in Devleopment";
-  }
   return "NotAvailable.png";
 }
