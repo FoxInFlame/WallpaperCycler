@@ -16,7 +16,8 @@
     "scripts": [
       "jquery-2.2.3.min.js",
       "background.js"
-    ]
+    ],
+    "persistent": true
   },
   "options_page": "options.html",
   

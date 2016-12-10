@@ -1,7 +1,9 @@
-if (/\bCrOS\b/.test(navigator.userAgent)) {
-  cycleWallpaper();
-} else {
-  alert("You are not on Chrome OS, thus installing this extension is useless!");
+function init() {
+  if (/\bCrOS\b/.test(navigator.userAgent)) {
+    cycleWallpaper();
+  } else {
+    alert("You are not on Chrome OS, thus installing this extension is useless!");
+  }
 }
 
 var source;
@@ -17,6 +19,12 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
   if(alarm.name == "cycleWallpaper") {
     cycleWallpaper();
   }
+});
+chrome.runtime.onStartup.addListener(function() {
+  init();
+});
+chrome.runtime.onInstalled.addListener(function() {
+  init();
 });
 function cycleWallpaper() {
   chrome.alarms.clear("cycleWallpaper", function() {
