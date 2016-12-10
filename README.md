@@ -18,8 +18,7 @@ WallpaperCycler provides the following sources:
 - Bing.com (Image of the Day)
 - Desktoppr.co (Random image)
 - /r/animewallpaper (Hot, New, Hot w/ NSFW, New w/ NSFW)
-- ~~Pixabay.com (20 categories)~~
-- Random (Random source)
+- DeviantArt Wallpapers (14 categories)
+- Random (Chooses Random source from above)
 
 Bing turned off the Image of the Day API with the "Access-Control-Allow-Origin" header, but I used crossorigin.me to access the API.
-Pixabay is still not answering in giving me the permission to use the HD wallpapers, and so, the sources for Pixabay is currently not available.
