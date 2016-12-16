@@ -274,6 +274,35 @@ function getURL(source, sw, sh) {
     ];
     return getURL(sources[Math.floor(Math.random()*sources.length)], sw, sh);
   }
+  if(source == "random-random-sfw") {
+    var sources = [
+      "unsplash-random",
+      "unsplash-buildings",
+      "unsplash-food",
+      "unsplash-nature",
+      "unsplash-people",
+      "unsplash-technology",
+      "unsplash-objects",
+      "nasa-apod",
+      "desktoppr-wallpaper",
+      "reddit-animewallpaper-new",
+      "reddit-animewallpaper-hot",
+      "deviantart-wallpaper-3d",
+      "deviantart-wallpaper-abstract",
+      "deviantart-wallpaper-animals",
+      "deviantart-wallpaper-fantasy",
+      "deviantart-wallpaper-fractals",
+      "deviantart-wallpaper-widescreen",
+      "deviantart-wallpaper-scenery",
+      "deviantart-wallpaper-apple",
+      "deviantart-wallpaper-horror",
+      "deviantart-wallpaper-minimalistic",
+      "deviantart-wallpaper-other",
+      "deviantart-wallpaper-scifi",
+      "deviantart-wallpaper-vehicles"
+    ];
+    return getURL(sources[Math.floor(Math.random()*sources.length)], sw, sh);
+  }
   
   return "NotAvailable.png";
 }
